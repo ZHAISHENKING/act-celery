@@ -1,11 +1,17 @@
-# ultrabear-activity
+# 项目说明
 
-活动页面	
+> 此项目缺少执行所需PRD文件无法运行,主要记录celery在flask工厂模式项目中运行所踩的坑
 
-| 功能         | Method | URL                     | Field                                        |
-| ------------ | ------ | ----------------------- | -------------------------------------------- |
-| 文件展示     | POST   | /docs/f/<id>/           | id                                           |
-| 获取作品信息 | GET    | /docs/student_all/<id>/ | id                                           |
-| 添加学生报名 | POST   | /docs/student/          | name  phone                                  |
-| 查看报名学生 | GET    | /docs/student/          |                                              |
-| 补充完整信息 | POST   | /docs/student_info/     | id， fname ，equipments， city， sex， grade |
+所需模块
+
+```bash
+Celery
+Flask-Celery-Helper
+Flask-And-Redis
+```
+
+### 基本配置
+
+配置celery主要的几个文件是 `rsync_task`目录中的两个文件`__init__.py`作为实例化入口, `app.py`作为init_app入口，`config.py`填写redis参数和celery运行所需的`borker`,`backend`参数,`get_ip_city`写需要异步执行的函数`get_ip`, `wechat`目录下的`api.py`中调用`get_ip`方法
+
+celery运行命令`celery worker -A manage.celery --loglevel=info`
